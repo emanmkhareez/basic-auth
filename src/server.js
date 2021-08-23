@@ -9,6 +9,11 @@ const start = (port) => {
     console.log(`The server start running at port ${port}`);
   });
 };
+
+
+app.get('/', (req, res) => {
+  res.status(200).send('Hello 👋 to basic-auth server 🖥')
+})
 app.use(userRoute);
 module.exports = {
   app: app,

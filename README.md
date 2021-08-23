@@ -6,10 +6,10 @@ this server to login and signup
 
 
 
-[PR]()
+[PR](https://github.com/emanmkhareez/bearer-auth/pulls?q=is%3Apr+is%3Aclosed)
 
-[herkouLink]()
+[herkouLink](https://bearerautheman.herokuapp.com/)
 
-[Action](https://github.com/emanmkhareez/basic-express-server/actions)
+
 
 ![UML](uml6.jpg)
