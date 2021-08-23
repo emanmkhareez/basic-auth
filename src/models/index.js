@@ -1,6 +1,7 @@
-const POSTGRES_URI = process.env.POSTGRES_URI ||  "postgres://postgres@localhost:5432/authdb";
-const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config()
+const POSTGRES_URI = `${process.env.POSTGRES_URI}` 
+const { Sequelize, DataTypes } = require('sequelize');
+
 
 const users=require('./user')
 var sequelize = new Sequelize(POSTGRES_URI, {});
