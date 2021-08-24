@@ -1,36 +1,32 @@
-"use strict";
-const server = require("../src/server");
-const supertest = require("supertest");
-const request = supertest(server.app);
+  
+'use strict';
 
-describe('Server API Test',()=>{
-    it('SignUp test',async()=>{
-        const data=await request.post('/signup').send({
-            username:"ahmad12",
-            password:"test@123"
-        });
-        expect(data.status).toEqual(200);
-    });
+const loggerMiddleware = require('../src/middleware/logger');
 
-    it('SignIn',async()=>{
-        const data=await request.post('/signin').auth('ahmad12','test@123');
-        expect(data.status).toEqual(200);
-    });
+let consoleSpy;
+let req = {};
+let res = {};
+let next = jest.fn();
 
-    it('SignIn Middleware not access',async()=>{
-        const data=await request.post('/signin').auth('ahmad1','test@123125');
-        expect(data.status).toEqual(403);
-    });
+beforeEach(() => {
+    consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+})
 
-    it('SignUp , SignIn',async()=>{
-        const reqObj=await request.post('/signup').send({
-            username:'Qusi1',
-            password:'test123'
-        });
-        const data=await request.post('/signin').send({
-            username:'Qusi1',
-            password:'test123'
-        }).auth(reqObj.body.username,'test123');
-        expect(data.status).toEqual(200);
+afterEach(() => {
+    consoleSpy.mockRestore();
+})
+describe('logger middleware', () => {
+    it('should log to the console', () => {
+        //act
+        loggerMiddleware(req, res, next);
+        //assert
+        expect(consoleSpy).toHaveBeenCalled();
+    })
+
+    it('should move to next middleware', () => {
+        //act
+        loggerMiddleware(req, res, next);
+        //assert
+        expect(next).toHaveBeenCalledWith();
     })
 })
