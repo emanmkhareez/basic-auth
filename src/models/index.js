@@ -1,10 +1,31 @@
-require('dotenv').config()
-const POSTGRES_URI = `${process.env.POSTGRES_URI}` 
+'use strict';
+
+require('dotenv').config();
+
+
+
 const { Sequelize, DataTypes } = require('sequelize');
 
 
 const users=require('./user')
-var sequelize = new Sequelize(POSTGRES_URI, {});
+
+const DATABASE_URL = process.env.DATABASE_URL;
+
+const DATABASE_CONFIG = {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    }
+  }
+}
+
+const sequelize = new Sequelize(DATABASE_URL, DATABASE_CONFIG);
+
+
+
+
+
 
 module.exports = {
     db: sequelize,
