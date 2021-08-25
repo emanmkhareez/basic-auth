@@ -20,6 +20,7 @@ const basicAuth = async (req, res, next) => {
         res.status(200).json({
           username: username,
           id: user.id,
+          password:password
         });
         next();
       } else {
